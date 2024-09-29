@@ -141,6 +141,8 @@
                         echo "¿Tiene moto?: " . $moto . "<br>";
                         echo "¿Tiene barco?: " . $barco . "<br>";
                         echo "Comida escogida: " . $comida . "<br>";
+                        echo 'Fichero 1: <img src="./ficheros/' . $fichero1 . '" width="50%"><br>';
+                        echo 'Fichero 2: <img src="./ficheros/' . $fichero2 . '"width="50%"><br>';
                     }
                 }
             } 
