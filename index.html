@@ -7,14 +7,14 @@
 </head>
 <body>
     <form method="POST" action="recibe_datos.php">
-        <label for="nombre">Nombre: </label><input type="text" placeholder="Escriba su nombre aquí" id="nombre"> <br>
-        <label for="apellidos">Apellidos: </label><input type="text" placeholder="Escriba sus apellidos aquí" id="apellidos"> <br>
+        <label for="nombre">Nombre: </label><input type="text" placeholder="Escriba su nombre aquí" name="nombre1"> <br>
+        <label for="apellidos">Apellidos: </label><input type="text" placeholder="Escriba sus apellidos aquí" name="apellidos"> <br>
         <label for="vehiculo">Escoja si tiene alguno de estos vehiculos: </label>
-        Coche <input type="checkbox" name="vehiculo" id="vehiculo" value="coche">
-        Moto <input type="checkbox" name="vehiculo" id="vehiculo" value="moto"> 
-        Barco <input type="checkbox" name="vehiculo" id="vehiculo" value="barco"><br>
+        Coche <input type="checkbox" name="vehiculo" name="vehiculo" value="coche">
+        Moto <input type="checkbox" name="vehiculo" name="vehiculo" value="moto"> 
+        Barco <input type="checkbox" name="vehiculo" name="vehiculo" value="barco"><br>
         <label for="comida">Escoja una comida: </label>
-        <select name="comida" id="comida">
+        <select name="comida" name="comida">
             <option value="pizza">Pizza</option>
             <option value="hamburgesa">Hamburguesa</option>
             <option value="papas_fritas">Papas Fritas</option>
