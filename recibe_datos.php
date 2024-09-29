@@ -33,7 +33,7 @@
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
 
                     $line = 0;
-                    while(!feof($myfile)) {
+                    while(!feof($gatoFile)) {
                         $gato[$line] = fgets($gatoFile);
                         $line += 1;
                     }
