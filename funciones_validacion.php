@@ -63,7 +63,7 @@
             }
         }
         function validarVehiculos($Coche, $Moto, $Barco){
-            if($Coche == 'No' $$ $Moto == 'No' $$ $Barco == 'No'){
+            if($Coche == 'No' && $Moto == 'No' && $Barco == 'No'){
                 return false;
             } else {
                 return true;
