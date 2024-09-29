@@ -9,6 +9,7 @@
     <?php
         // Se necesita usar las funciones de validación
         require __DIR__ . "/funciones_validacion.php";
+        $directorio = "ficheros/";
 
         // Si el formulario ha sido enviado
         
@@ -26,8 +27,76 @@
                     $inmunodeficiente = isset($_POST['inmunodeficiente']) ? "Sí" : "No";
                     $castrado = isset($_POST['castrado']) ? "Sí" : "No";
 
+                    // Abrir el fichero
+                    $gatoFile = fopen("aileen_fichero.txt", "r") or die("No se pudo abrir el fichero");
+
                     // Array indexado para los datos
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
+
+                    $line = 0;
+                    while(!feof($gatoFile)) {
+                        $gato[$line] = fgets($gatoFile);
+                        $line += 1;
+                    }
+
+                    // Cerrar el fichero
+                    fclose($gatoFile);
+
+                    // Guardar los ficheros de datos
+                    if (isset($_FILES['primer_fichero']) && $_FILES['primer_fichero']['error'] == UPLOAD_ERR_OK) {
+
+                        // Coger los datos del fichero
+                        $primer_fichero = basename($_FILES['primer_fichero']['name']);
+                        $primer_fichero_dir = $directorio.$primer_fichero;
+                
+                        // Comprobar si hay un archivo con el mismo nombre ya en la carpeta, si lo hay le pone el numero al final
+                        $numero = 1;
+                        $primer_fichero_path = pathinfo($primer_fichero);
+                        while (file_exists($primer_fichero_dir)) {
+                            $primer_fichero = $primer_fichero_path['filename']
+                                ."_"
+                                .$numero
+                                ."."
+                                .$primer_fichero_path['extension'];
+                            $primer_fichero_dir = $directorio.$primer_fichero;
+                            $numero++;
+                        }
+                
+                        // Mover el archivo a la carpeta de destino
+                        if (move_uploaded_file($_FILES['primer_fichero']['tmp_name'], $primer_fichero_dir)) {
+                            echo "Se ha subido el primer fichero<br>";
+                        } else {
+                            echo "ERROR: No se puede subir el primer fichero<br>";
+                        }
+                    }
+
+                    // Guardar los ficheros de datos
+                    if (isset($_FILES['segundo_fichero']) && $_FILES['segundo_fichero']['error'] == UPLOAD_ERR_OK) {
+
+                        // Coger los datos del fichero
+                        $segundo_fichero = basename($_FILES['segundo_fichero']['name']);
+                        $segundo_fichero_dir = $directorio.$segundo_fichero;
+                
+                        // Comprobar si hay un archivo con el mismo nombre ya en la carpeta, si lo hay le pone el numero al final
+                        $numero = 1;
+                        $segundo_fichero_path = pathinfo($segundo_fichero);
+                        while (file_exists($segundo_fichero_dir)) {
+                            $segundo_fichero = $segundo_fichero_path['filename']
+                                ."_"
+                                .$numero
+                                ."."
+                                .$segundo_fichero_path['extension'];
+                            $segundo_fichero_dir = $directorio.$segundo_fichero;
+                            $numero++;
+                        }
+                
+                        // Mover el archivo a la carpeta de destino
+                        if (move_uploaded_file($_FILES['segundo_fichero']['tmp_name'], $segundo_fichero_dir)) {
+                            echo "Se ha subido el segundo fichero<br>";
+                        } else {
+                            echo "ERROR: No se puede subir el segundo fichero<br>";
+                        }
+                    }
 
                     // Hacer la validación con las funciones
                     if (validacionNombre($gato[0]) &&
@@ -38,7 +107,11 @@
                         echo "Nombre del gato: " . htmlspecialchars($gato[0]) . "<br>";
                         echo "Color del gato: " . htmlspecialchars($gato[1]) . "<br>";
                         echo "¿Es inmunodeficiente?: " . $gato[2] . "<br>";
-                         echo "¿Está castrado?: " . $gato[3] . "<br>";
+                        echo "¿Está castrado?: " . $gato[3] . "<br>";
+                        
+                        echo "<img src='./ficheros/$primer_fichero'>";
+                        echo "<img src='./ficheros/$segundo_fichero'>";
+
                     } else {
                         echo "<a href='gato.html'>Volver al formulario</a>";
                     }
