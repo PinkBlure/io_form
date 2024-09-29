@@ -108,8 +108,8 @@
                         echo "¿Es inmunodeficiente?: " . $gato[2] . "<br>";
                         echo "¿Está castrado?: " . $gato[3] . "<br>";
                         
-                        echo "<img src='./ficheros/$primer_fichero_dir'>";
-                        echo "<img src='./ficheros/$segundo_fichero_dir'>";
+                        echo "<img src='./ficheros/$primer_fichero'>";
+                        echo "<img src='./ficheros/$segundo_fichero'>";
 
                     } else {
                         echo "<a href='gato.html'>Volver al formulario</a>";
