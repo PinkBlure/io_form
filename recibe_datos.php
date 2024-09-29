@@ -7,31 +7,42 @@
 </head>
 <body>
     <?php
+        // Se necesita usar las funciones de validación
         require __DIR__ . "/funciones_validacion.php";
 
+        // Si el formulario ha sido enviado
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (isset($_POST['formulario'])) {
                 $formulario = $_POST['formulario'];
 
+                // Se rellenó el formulario de gato
                 if ($formulario == 'gato') {
+
+                    // Recoger datos
                     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
                     $color = isset($_POST['color']) ? $_POST['color'] : '';
                     $inmunodeficiente = isset($_POST['inmunodeficiente']) ? "Sí" : "No";
                     $castrado = isset($_POST['castrado']) ? "Sí" : "No";
 
+                    // Array indexado para los datos
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
 
-                    if ($gato[0] == "") {
-                        echo "ERROR: El gato debe tener nombre.<br>";
-                        echo "<a href='gato.html'>Volver al formulario</a>";
-                    } else {
+                    // Hacer la validación con las funciones
+                    if (validacionNombre($gato[0]) &&
+                        validacionColor($gato[1]) &&
+                        validacionInmunodeficiente($gato[2]) &&
+                        validacionCastrado($gato[3])) {
                         echo "DATOS CORRECTOS:<br>";
-                        echo "Nombre del gato: " . htmlspecialchars($nombre) . "<br>";
-                        echo "Color del gato: " . htmlspecialchars($color) . "<br>";
-                        echo "¿Es inmunodeficiente?: " . $inmunodeficiente . "<br>";
-                        echo "¿Está castrado?: " . $castrado . "<br>";
+                        echo "Nombre del gato: " . htmlspecialchars($gato[0]) . "<br>";
+                        echo "Color del gato: " . htmlspecialchars($gato[1]) . "<br>";
+                        echo "¿Es inmunodeficiente?: " . $gato[2] . "<br>";
+                         echo "¿Está castrado?: " . $gato[3] . "<br>";
+                    } else {
+                        echo "<a href='gato.html'>Volver al formulario</a>";
                     }
+                
+                // Se rellenó el formulario de index
                 } elseif ($formulario == 'index'){
                     $nombre1 = isset($_POST['nombre1']) ? $_POST['nombre1'] : '';
                     $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
