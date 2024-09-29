@@ -7,6 +7,8 @@
 </head>
 <body>
     <?php
+        require __DIR__ . "/funciones_validacion.php";
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (isset($_POST['formulario'])) {
