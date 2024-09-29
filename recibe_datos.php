@@ -22,16 +22,19 @@
 
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
 
-                    if ($gato[0] == "") {
-                        echo "ERROR: El gato debe tener nombre.<br>";
-                        echo "<a href='gato.html'>Volver al formulario</a>";
-                    } else {
+                    if (validacionNombre($nombre) &&
+                        validacionColor($color) &&
+                        validacionInmunodeficiente($inmunodeficiente) &&
+                        validacionCastrado($castrado)) {
                         echo "DATOS CORRECTOS:<br>";
                         echo "Nombre del gato: " . htmlspecialchars($nombre) . "<br>";
                         echo "Color del gato: " . htmlspecialchars($color) . "<br>";
                         echo "¿Es inmunodeficiente?: " . $inmunodeficiente . "<br>";
-                        echo "¿Está castrado?: " . $castrado . "<br>";
+                         echo "¿Está castrado?: " . $castrado . "<br>";
+                    } else {
+                        echo "<a href='gato.html'>Volver al formulario</a>";
                     }
+
                 } elseif ($formulario == 'index'){
                     $nombre1 = isset($_POST['nombre1']) ? $_POST['nombre1'] : '';
                     $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
