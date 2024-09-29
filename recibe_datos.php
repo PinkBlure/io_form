@@ -53,11 +53,17 @@
 
                     $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida];
 
-                    if ($persona[0] == '' && !validarNombre($persona[0])) {
-                        echo "ERROR: Debe introducir un nombre.<br>";
+                    if (!validarNombre($persona[0])) {
+                        echo "ERROR: Debe introducir un nombre valido.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    } elseif ($persona[1] == '') {
-                        echo "ERROR: Debe introducir apellidos.<br>";
+                    } elseif (!validarApellidos(persona[1])) {
+                        echo "ERROR: Debe introducir apellidos validos.<br>";
+                        echo "<a href='index.html'>Volver al formulario</a>";
+                    } elseif(validarVehiculos($persona[2], $persona[3], $persona[4])){
+                        echo "ERROR: Debe tener al menos un tipo de vehiculo.<br>";
+                        echo "<a href='index.html'>Volver al formulario</a>";
+                    } elseif(!validarComida(persona[5])){
+                        echo "ERROR: No aceptamos gente que prefiera el pollo frito a las otras opciones.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
                     } else {
                         echo "DATOS CORRECTOS:<br>";

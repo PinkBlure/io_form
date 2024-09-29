@@ -42,10 +42,31 @@
         // Funciones de validacion para index
 
         function validarNombre($nombre){
-            if (ctype_alpha($nombre)){
+            if ($nombre != '' && ctype_alpha($nombre)){
                 return true;
             } else {
                 return false;
+            }
+        }
+        function validarApellidos($Apellidos){
+            if ($Apellidos != '' && ctype_alpha($Apellidos)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function validarComida($Comida){
+            if($Comida == 'pollo_asado'){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function validarVehiculos($Coche, $Moto, $Barco){
+            if($Coche == 'No' $$ $Moto == 'No' $$ $Barco == 'No'){
+                return false;
+            } else {
+                return true;
             }
         }
     ?>
