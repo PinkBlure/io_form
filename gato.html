@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gato form</title>
+</head>
+<body style="max-width: 95%;">
+    <form style="display: flex; flex-direction: column;" method="post">
+        <legend>Formulario para tu gato</legend>
+
+        <br>
+
+        <label for="nombre">Nombre del gato:</label>
+        <input type="text" id="nombre" placeholder="Escribe el nombre de tu gato" value="Copito">
+
+        <br>
+
+        <label for="color">Seleciona el color del gato:</label>
+        <select>
+            <option value="negro" selected>Negro</option>
+            <option value="blanco">Blanco</option>
+            <option value="naranja">Naranja</option>
+            <option value="gris">Gris</option>
+            <option value="Con manchas">Con manchas</option>
+        </select>
+
+        <br>
+
+        <label for="salud">Marque los datos:</label>
+        <div>
+            ¿Es inmunodeficiente?: <input name="salud" type="checkbox" value="inmunodeficiente">
+        </div>
+        <div>
+            ¿Está castrado?
+            <input name="salud" type="checkbox" value="castrado">
+        </div>   
+    </form>
+</body>
+</html>
