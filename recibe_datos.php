@@ -42,7 +42,7 @@
 
                     $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida];
 
-                    if ($persona[0] == '') {
+                    if ($persona[0] == '' && !validarNombre($persona[0])) {
                         echo "ERROR: Debe introducir un nombre.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
                     } elseif ($persona[1] == '') {
