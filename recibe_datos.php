@@ -45,13 +45,19 @@
                 // Se rellenó el formulario de index
                 // Comprueba que sea el formulario especifico
                 } elseif ($formulario == 'index'){
+                    // Toma de valores por defecto y almacena en un array.
+                    if(file_exists("./moises_valores.txt")){
+                        $fichero = file_get_contents("./moises_valores.txt");
+                        $valores_por_defecto = explode("-", $fichero);
+                    }
+
                     // Excepcion de errores en caso de formulario vacio
-                    $nombre1 = isset($_POST['nombre1']) ? $_POST['nombre1'] : '';
-                    $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
-                    $coche = isset($_POST['coche']) ? 'Si' : 'No';
-                    $moto = isset($_POST['moto']) ? 'Si' : 'No';
-                    $barco = isset($_POST['barco']) ? 'Si' : 'No';
-                    $comida = isset($_POST['comida']) ? $_POST['comida'] : '';
+                    $nombre1 = isset($_POST['nombre1']) && !empty(trim($_POST['nombre1'])) ? $_POST['nombre1'] : $valores_por_defecto[0];
+                    $apellidos = isset($_POST['apellidos']) && !empty(trim($_POST['apellidos'])) ? $_POST['apellidos'] : $valores_por_defecto[1];
+                    $coche = isset($_POST['coche']) ? 'Si' : $valores_por_defecto[2];
+                    $moto = isset($_POST['moto']) ? 'Si' : $valores_por_defecto[3];
+                    $barco = isset($_POST['barco']) ? 'Si' : $valores_por_defecto[4];
+                    $comida = isset($_POST['comida']) ? $_POST['comida'] : $valores_por_defecto[5];
 
                     // Recolecta de datos en array
                     $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida];
@@ -63,10 +69,10 @@
                     } elseif (!validarApellidos($persona[1])) {
                         echo "ERROR: Debe introducir apellidos validos.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    } elseif(validarVehiculos($persona[2], $persona[3], $persona[4])){
+                    } elseif(!validarVehiculos($persona[2], $persona[3], $persona[4])){
                         echo "ERROR: Debe tener al menos un tipo de vehiculo.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    } elseif(!validarComida($persona[5])){
+                    } elseif(validarComida($persona[5])){
                         echo "ERROR: No aceptamos gente que prefiera el pollo frito a las otras opciones.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
                     } else {
