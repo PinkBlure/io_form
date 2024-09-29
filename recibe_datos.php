@@ -32,6 +32,24 @@
 
                     // Array indexado para los datos
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
+                    $tags_gato = ['nombre', 'color', 'inmunodeficiente', 'castrado'];
+
+                    // Escritura de datos en un fichero
+                    $datos_formateados = '';
+                    for($i = 0; $i < sizeof($gato); $i++){
+                        if($i != (sizeof($gato)-1)){
+                            $datos_formateados .= "$tags_gato[$i]:$gato[$i]-";
+                        } else {
+                            $datos_formateados .= "$tags_gato[$i]:$gato[$i]|";
+                        }
+                    }
+                    if(!file_exists('./datos_formulario')){
+                        
+                        file_put_contents('datos_formulario', $datos_formateados);
+                    } else {
+                        
+                        file_put_contents('datos_formulario', $datos_formateados, FILE_APPEND);
+                    }
 
                     $line = 0;
                     while(!feof($gatoFile)) {
@@ -184,10 +202,24 @@
                         
                     }
                     
-                    
-
                     // Recolecta de datos en array
                     $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida];
+                    $tags_persona = ['nombre', 'apellidos', 'coche', 'moto', 'barco', 'comida'];
+
+                    // Escritura de datos en un fichero
+                    $datos_formateados = '';
+                        for($i = 0; $i < sizeof($persona); $i++){
+                            if($i != (sizeof($persona)-1)){
+                                $datos_formateados .= "$tags_persona[$i]:$persona[$i]-";
+                            } else {
+                                $datos_formateados .= "$tags_persona[$i]:$persona[$i]|";
+                            }
+                        }
+                    if(!file_exists('./datos_formulario')){
+                        file_put_contents('datos_formulario', $datos_formateados);
+                    } else {
+                        file_put_contents('datos_formulario', $datos_formateados, FILE_APPEND);
+                    }
 
                     // Validacion de datos
                     if (!validarNombre($persona[0])) {
