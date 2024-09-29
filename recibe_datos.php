@@ -59,12 +59,12 @@
                     if (isset($_FILES['primer_fichero']) && $_FILES['primer_fichero']['error'] == UPLOAD_ERR_OK) {
 
                         // Coger los datos del fichero
-                        $primer_fichero = basename($_FILES['fichero1']['name']);
+                        $primer_fichero = basename($_FILES['primer_fichero']['name']);
                         $primer_fichero_dir = $directorio.$primer_fichero;
                 
                         // Comprobar si hay un archivo con el mismo nombre ya en la carpeta, si lo hay le pone el numero al final
                         $numero = 1;
-                        $primer_fichero_path = pathinfo($primer_fichero_path);
+                        $primer_fichero_path = pathinfo($primer_fichero);
                         while (file_exists($primer_fichero_dir)) {
                             $primer_fichero = $primer_fichero_path['filename']
                                 ."_"
