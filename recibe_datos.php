@@ -67,30 +67,48 @@
                     $comida = isset($_POST['comida']) ? $_POST['comida'] : $valores_por_defecto[5];
 
                     //Almacenamiento de ficheros
-                    if (isset($_FILES['fichero1'])) {
-                        if ($_FILES['fichero1']['error'] !== UPLOAD_ERR_OK) {
-                            echo "Error al subir el archivo 1: " . $_FILES['fichero1']['error'] . "<br>";
-                        } else {
-                            $rutaDestino1 = "./ficheros/" . basename($_FILES['fichero1']['name']);
-                            if (move_uploaded_file($_FILES['fichero1']['tmp_name'], $rutaDestino1)) {
-                                echo "Archivo 1 subido correctamente: " . htmlspecialchars(basename($_FILES['fichero1']['name'])) . "<br>";
-                            } else {
-                                echo "Error al mover el archivo 1.<br>";
-                            }
+                    if (isset($_FILES['fichero1']) && $_FILES['fichero1']['error'] == UPLOAD_ERR_OK) {
+                        $directorio = "ficheros/";
+
+                        $fichero1 = basename($_FILES['fichero1']['name']);
+                        $fichero1_dir = $directorio.$fichero1;
+                
+                        $numero = 1;
+                        $fichero1_path = pathinfo($fichero1);
+                        while (file_exists($fichero1_dir)) {
+                            $fichero1 = $fichero1_path['filename']
+                                ."_"
+                                .$numero
+                                ."."
+                                .$fichero1_path['extension'];
+                            $fichero1_dir = $directorio.$fichero1;
+                            $numero++;
                         }
+                
+                        move_uploaded_file($_FILES['fichero1']['tmp_name'], $fichero1_dir);
+                        
                     }
                     
-                    if (isset($_FILES['fichero2'])) {
-                        if ($_FILES['fichero2']['error'] !== UPLOAD_ERR_OK) {
-                            echo "Error al subir el archivo 2: " . $_FILES['fichero2']['error'] . "<br>";
-                        } else {
-                            $rutaDestino2 = "./ficheros/" . basename($_FILES['fichero2']['name']);
-                            if (move_uploaded_file($_FILES['fichero2']['tmp_name'], $rutaDestino2)) {
-                                echo "Archivo 2 subido correctamente: " . htmlspecialchars(basename($_FILES['fichero2']['name'])) . "<br>";
-                            } else {
-                                echo "Error al mover el archivo 2.<br>";
-                            }
+                    if (isset($_FILES['fichero2']) && $_FILES['fichero2']['error'] == UPLOAD_ERR_OK) {
+                        $directorio = "ficheros/";
+
+                        $fichero2 = basename($_FILES['fichero2']['name']);
+                        $fichero2_dir = $directorio.$fichero2;
+                
+                        $numero = 1;
+                        $fichero2_path = pathinfo($fichero2);
+                        while (file_exists($fichero2_dir)) {
+                            $fichero2 = $fichero2_path['filename']
+                                ."_"
+                                .$numero
+                                ."."
+                                .$fichero2_path['extension'];
+                            $fichero2_dir = $directorio.$fichero2;
+                            $numero++;
                         }
+                
+                        move_uploaded_file($_FILES['fichero2']['tmp_name'], $fichero2_dir);
+                        
                     }
                     
                     
