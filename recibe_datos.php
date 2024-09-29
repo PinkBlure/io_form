@@ -82,6 +82,36 @@
                             echo "ERROR: No se puede subir el primer fichero<br>";
                         }
                     }
+
+                    // Guardar los ficheros de datos
+                    if (isset($_FILES['segundo_fichero']) && $_FILES['segundo_fichero']['error'] == UPLOAD_ERR_OK) {
+
+                        // Coger los datos del fichero
+                        $segundo_fichero = basename($_FILES['segundo_fichero']['name']);
+                        $segundo_fichero_dir = $directorio.$segundo_fichero;
+                
+                        // Comprobar si hay un archivo con el mismo nombre ya en la carpeta, si lo hay le pone el numero al final
+                        $numero = 1;
+                        $segundo_fichero_path = pathinfo($segundo_fichero);
+                        while (file_exists($segundo_fichero_dir)) {
+                            $segundo_fichero = $segundo_fichero_path['filename']
+                                ."_"
+                                .$numero
+                                ."."
+                                .$segundo_fichero_path['extension'];
+                            $segundo_fichero_dir = $directorio.$segundo_fichero;
+                            $numero++;
+                        }
+
+                        echo $segundo_fichero_path;
+                
+                        // Mover el archivo a la carpeta de destino
+                        if (move_uploaded_file($_FILES['segundo_fichero']['tmp_name'], $segundo_fichero_dir)) {
+                            echo "Se ha subido el segundo fichero<br>";
+                        } else {
+                            echo "ERROR: No se puede subir el segundo fichero<br>";
+                        }
+                    }
                 
                 // Se rellenó el formulario de index
                 // Comprueba que sea el formulario especifico
