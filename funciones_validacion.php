@@ -19,7 +19,7 @@
         }
 
         function validacionColor($color) {
-            if ($color == "Blanco") {
+            if ($color == "blanco") {
                 echo "No se aceptan gatos blancos";
                 return false;
             } return true;
