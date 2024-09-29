@@ -13,12 +13,12 @@
         <br>
 
         <label for="nombre">Nombre del gato:</label>
-        <input type="text" id="nombre" placeholder="Escribe el nombre de tu gato" value="Copito">
+        <input type="text" name="nombre" placeholder="Escribe el nombre de tu gato" value="Copito">
 
         <br>
 
         <label for="color">Seleciona el color del gato:</label>
-        <select>
+        <select name="color">
             <option value="negro" selected>Negro</option>
             <option value="blanco">Blanco</option>
             <option value="naranja">Naranja</option>
@@ -30,11 +30,11 @@
 
         <label for="salud">Marque los datos:</label>
         <div>
-            ¿Es inmunodeficiente?: <input name="salud" type="checkbox" value="inmunodeficiente">
+            ¿Es inmunodeficiente?: <input id="salud" type="checkbox" name="inmunodeficiente">
         </div>
         <div>
             ¿Está castrado?
-            <input name="salud" type="checkbox" value="castrado">
+            <input id="salud" type="checkbox" name="castrado">
         </div>
 
         <br>
