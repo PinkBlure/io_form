@@ -69,6 +69,13 @@
                 return true;
             }
         }
+        function validarFichero($fichero){
+            if(strtolower(pathinfo($fichero, PATHINFO_EXTENSION)) == "png"){
+                return true;
+            } else {
+                return false;
+            }
+        }
     ?>
 </body>
 </html>

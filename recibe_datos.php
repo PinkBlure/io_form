@@ -51,6 +51,12 @@
                         $valores_por_defecto = explode("-", $fichero);
                     }
 
+                    // Comprueba la existencia y, en su defecto crea la carpeta ficheros
+                    if(!file_exists("./ficheros")){
+                        mkdir("ficheros", 0755);
+                    }
+
+
                     // Excepcion de errores en caso de formulario vacio
                     $nombre1 = isset($_POST['nombre1']) && !empty(trim($_POST['nombre1'])) ? $_POST['nombre1'] : $valores_por_defecto[0];
                     $apellidos = isset($_POST['apellidos']) && !empty(trim($_POST['apellidos'])) ? $_POST['apellidos'] : $valores_por_defecto[1];
@@ -58,9 +64,11 @@
                     $moto = isset($_POST['moto']) ? 'Si' : $valores_por_defecto[3];
                     $barco = isset($_POST['barco']) ? 'Si' : $valores_por_defecto[4];
                     $comida = isset($_POST['comida']) ? $_POST['comida'] : $valores_por_defecto[5];
+                    $fichero1 = isset($_POST['fichero1']) ? $_POST['fichero1'];
+                    $fichero2 = isset($_POST['fichero2']) ? $_POST['fichero2'];
 
                     // Recolecta de datos en array
-                    $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida];
+                    $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida, $fichero1, $fichero2];
 
                     // Validacion de datos
                     if (!validarNombre($persona[0])) {
@@ -74,6 +82,9 @@
                         echo "<a href='index.html'>Volver al formulario</a>";
                     } elseif(validarComida($persona[5])){
                         echo "ERROR: No aceptamos gente que prefiera el pollo frito a las otras opciones.<br>";
+                        echo "<a href='index.html'>Volver al formulario</a>";
+                    } elseif(validarFichero($fichero1) || validarFichero($fichero2)){
+                        echo "ERROR: Los archivos no pueden ser tipo png.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
                     } else {
                         // Impresion de datos correctos
