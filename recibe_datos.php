@@ -41,20 +41,6 @@
                     // Cerrar el fichero
                     fclose($gatoFile);
 
-                    // Hacer la validación con las funciones
-                    if (validacionNombre($gato[0]) &&
-                        validacionColor($gato[1]) &&
-                        validacionInmunodeficiente($gato[2]) &&
-                        validacionCastrado($gato[3])) {
-                        echo "DATOS CORRECTOS:<br>";
-                        echo "Nombre del gato: " . htmlspecialchars($gato[0]) . "<br>";
-                        echo "Color del gato: " . htmlspecialchars($gato[1]) . "<br>";
-                        echo "¿Es inmunodeficiente?: " . $gato[2] . "<br>";
-                         echo "¿Está castrado?: " . $gato[3] . "<br>";
-                    } else {
-                        echo "<a href='gato.html'>Volver al formulario</a>";
-                    }
-
                     // Guardar los ficheros de datos
                     if (isset($_FILES['primer_fichero']) && $_FILES['primer_fichero']['error'] == UPLOAD_ERR_OK) {
 
@@ -102,8 +88,6 @@
                             $segundo_fichero_dir = $directorio.$segundo_fichero;
                             $numero++;
                         }
-
-                        echo $segundo_fichero_path;
                 
                         // Mover el archivo a la carpeta de destino
                         if (move_uploaded_file($_FILES['segundo_fichero']['tmp_name'], $segundo_fichero_dir)) {
@@ -111,6 +95,24 @@
                         } else {
                             echo "ERROR: No se puede subir el segundo fichero<br>";
                         }
+                    }
+
+                    // Hacer la validación con las funciones
+                    if (validacionNombre($gato[0]) &&
+                        validacionColor($gato[1]) &&
+                        validacionInmunodeficiente($gato[2]) &&
+                        validacionCastrado($gato[3])) {
+                        echo "DATOS CORRECTOS:<br>";
+                        echo "Nombre del gato: " . htmlspecialchars($gato[0]) . "<br>";
+                        echo "Color del gato: " . htmlspecialchars($gato[1]) . "<br>";
+                        echo "¿Es inmunodeficiente?: " . $gato[2] . "<br>";
+                        echo "¿Está castrado?: " . $gato[3] . "<br>";
+                        
+                        echo "<img src='./ficheros/$primer_fichero_dir'>";
+                        echo "<img src='./ficheros/$segundo_fichero_dir'>";
+
+                    } else {
+                        echo "<a href='gato.html'>Volver al formulario</a>";
                     }
                 
                 // Se rellenó el formulario de index
