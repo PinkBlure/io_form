@@ -9,6 +9,7 @@
     <?php
         // Se necesita usar las funciones de validación
         require __DIR__ . "/funciones_validacion.php";
+        $directorio = "ficheros/";
 
         // Si el formulario ha sido enviado
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -52,6 +53,34 @@
                          echo "¿Está castrado?: " . $gato[3] . "<br>";
                     } else {
                         echo "<a href='gato.html'>Volver al formulario</a>";
+                    }
+
+                    // Guardar los ficheros de datos
+                    if (isset($_FILES['primer_fichero']) && $_FILES['primer_fichero']['error'] == UPLOAD_ERR_OK) {
+
+                        // Coger los datos del fichero
+                        $primer_fichero = basename($_FILES['fichero1']['name']);
+                        $primer_fichero_dir = $directorio.$primer_fichero;
+                
+                        // Comprobar si hay un archivo con el mismo nombre ya en la carpeta, si lo hay le pone el numero al final
+                        $numero = 1;
+                        $primer_fichero_path = pathinfo($primer_fichero_path);
+                        while (file_exists($primer_fichero_dir)) {
+                            $primer_fichero = $primer_fichero_path['filename']
+                                ."_"
+                                .$numero
+                                ."."
+                                .$primer_fichero_path['extension'];
+                            $primer_fichero_dir = $directorio.$primer_fichero;
+                            $numero++;
+                        }
+                
+                        // Mover el archivo a la carpeta de destino
+                        if (move_uploaded_file($_FILES['primer_fichero']['tmp_name'], $primer_fichero_dir)) {
+                            echo "Se ha subido el primer fichero<br>";
+                        } else {
+                            echo "ERROR: No se puede subir el primer fichero<br>";
+                        }
                     }
                 
                 // Se rellenó el formulario de index
