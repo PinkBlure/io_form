@@ -11,6 +11,7 @@
         require __DIR__ . "/funciones_validacion.php";
 
         // Si el formulario ha sido enviado
+        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (isset($_POST['formulario'])) {
@@ -64,11 +65,38 @@
                     $moto = isset($_POST['moto']) ? 'Si' : $valores_por_defecto[3];
                     $barco = isset($_POST['barco']) ? 'Si' : $valores_por_defecto[4];
                     $comida = isset($_POST['comida']) ? $_POST['comida'] : $valores_por_defecto[5];
-                    $fichero1 = isset($_POST['fichero1']) ? $_POST['fichero1'] : '';
-                    $fichero2 = isset($_POST['fichero2']) ? $_POST['fichero2'] : '';
+
+                    //Almacenamiento de ficheros
+                    if (isset($_FILES['fichero1'])) {
+                        if ($_FILES['fichero1']['error'] !== UPLOAD_ERR_OK) {
+                            echo "Error al subir el archivo 1: " . $_FILES['fichero1']['error'] . "<br>";
+                        } else {
+                            $rutaDestino1 = "./ficheros/" . basename($_FILES['fichero1']['name']);
+                            if (move_uploaded_file($_FILES['fichero1']['tmp_name'], $rutaDestino1)) {
+                                echo "Archivo 1 subido correctamente: " . htmlspecialchars(basename($_FILES['fichero1']['name'])) . "<br>";
+                            } else {
+                                echo "Error al mover el archivo 1.<br>";
+                            }
+                        }
+                    }
+                    
+                    if (isset($_FILES['fichero2'])) {
+                        if ($_FILES['fichero2']['error'] !== UPLOAD_ERR_OK) {
+                            echo "Error al subir el archivo 2: " . $_FILES['fichero2']['error'] . "<br>";
+                        } else {
+                            $rutaDestino2 = "./ficheros/" . basename($_FILES['fichero2']['name']);
+                            if (move_uploaded_file($_FILES['fichero2']['tmp_name'], $rutaDestino2)) {
+                                echo "Archivo 2 subido correctamente: " . htmlspecialchars(basename($_FILES['fichero2']['name'])) . "<br>";
+                            } else {
+                                echo "Error al mover el archivo 2.<br>";
+                            }
+                        }
+                    }
+                    
+                    
 
                     // Recolecta de datos en array
-                    $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida, $fichero1, $fichero2];
+                    $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida];
 
                     // Validacion de datos
                     if (!validarNombre($persona[0])) {
@@ -83,10 +111,10 @@
                     } elseif(validarComida($persona[5])){
                         echo "ERROR: No aceptamos gente que prefiera el pollo frito a las otras opciones.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    } elseif(validarFichero($fichero1) || validarFichero($fichero2)){
+                    }/* elseif(validarFichero($_FILES['fichero1'][PATHINFO_EXTENSION]) || validarFichero($_FILES['fichero2'][PATHINFO_EXTENSION])){
                         echo "ERROR: Los archivos no pueden ser tipo png.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    } else {
+                    } */else {
                         // Impresion de datos correctos
                         echo "DATOS CORRECTOS:<br>";
                         echo "Nombre: " . $nombre1 . "<br>";
@@ -95,8 +123,6 @@
                         echo "¿Tiene moto?: " . $moto . "<br>";
                         echo "¿Tiene barco?: " . $barco . "<br>";
                         echo "Comida escogida: " . $comida . "<br>";
-                        echo '<img src="' . $fichero1 . "/><br>";
-                        echo $fichero2 . "<br>";
                     }
                 }
             } 

@@ -69,8 +69,8 @@
                 return true;
             }
         }
-        function validarFichero($fichero){
-            if(strtolower(pathinfo($fichero, PATHINFO_EXTENSION)) == "png"){
+        function validarFichero($pathinfo){
+            if(strtolower($pathinfo) == "gif"){
                 return true;
             } else {
                 return false;
