@@ -64,8 +64,8 @@
                     $moto = isset($_POST['moto']) ? 'Si' : $valores_por_defecto[3];
                     $barco = isset($_POST['barco']) ? 'Si' : $valores_por_defecto[4];
                     $comida = isset($_POST['comida']) ? $_POST['comida'] : $valores_por_defecto[5];
-                    $fichero1 = isset($_POST['fichero1']) ? $_POST['fichero1'];
-                    $fichero2 = isset($_POST['fichero2']) ? $_POST['fichero2'];
+                    $fichero1 = isset($_POST['fichero1']) ? $_POST['fichero1'] : '';
+                    $fichero2 = isset($_POST['fichero2']) ? $_POST['fichero2'] : '';
 
                     // Recolecta de datos en array
                     $persona = [$nombre1, $apellidos, $coche, $moto, $barco, $comida, $fichero1, $fichero2];
@@ -89,12 +89,14 @@
                     } else {
                         // Impresion de datos correctos
                         echo "DATOS CORRECTOS:<br>";
-                        echo "Nombre: " . htmlspecialchars($nombre1) . "<br>";
-                        echo "Apellidos: " . htmlspecialchars($apellidos) . "<br>";
+                        echo "Nombre: " . $nombre1 . "<br>";
+                        echo "Apellidos: " . $apellidos . "<br>";
                         echo "¿Tiene coche?: " . $coche . "<br>";
                         echo "¿Tiene moto?: " . $moto . "<br>";
                         echo "¿Tiene barco?: " . $barco . "<br>";
-                        echo "Comida escogida: " . $comida;
+                        echo "Comida escogida: " . $comida . "<br>";
+                        echo '<img src="' . $fichero1 . "/><br>";
+                        echo $fichero2 . "<br>";
                     }
                 }
             } 
