@@ -7,7 +7,7 @@
 </head>
 <body style="max-width: 95%;">
     
-    <form  action="recibe_datos.php" style="display: flex; flex-direction: column;" method="post" >
+    <form action="recibe_datos.php" style="display: flex; flex-direction: column;" method="post" enctype="multipart/form-data">
         <legend>Formulario para tu gato</legend>
 
         <br>
@@ -36,6 +36,14 @@
             ¿Está castrado?
             <input id="salud" type="checkbox" name="castrado">
         </div>
+
+        <br>
+
+        <label for="primer_fichero">Primer fichero:</label>
+        <input type="file" id="primer_fichero" name="primer_fichero">
+
+        <label for="segundo_fichero">segundo fichero:</label>
+        <input type="file" id="segundo_fichero" name="segundo_fichero">
 
         <br>
 

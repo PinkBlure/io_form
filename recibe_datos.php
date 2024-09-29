@@ -25,8 +25,20 @@
                     $inmunodeficiente = isset($_POST['inmunodeficiente']) ? "Sí" : "No";
                     $castrado = isset($_POST['castrado']) ? "Sí" : "No";
 
+                    // Abrir el fichero
+                    $gatoFile = fopen("aileen_fichero.txt", "r") or die("No se pudo abrir el fichero");
+
                     // Array indexado para los datos
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
+
+                    $line = 0;
+                    while(!feof($myfile)) {
+                        $gato[$line] = fgets($gatoFile);
+                        $line += 1;
+                    }
+
+                    // Cerrar el fichero
+                    fclose($gatoFile);
 
                     // Hacer la validación con las funciones
                     if (validacionNombre($gato[0]) &&
