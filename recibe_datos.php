@@ -129,15 +129,14 @@
                     if(!file_exists("./ficheros")){
                         mkdir("ficheros", 0755);
                     }
-
-
+                    
                     // Excepcion de errores en caso de formulario vacio
-                    $nombre1 = isset($_POST['nombre1']) && !empty(trim($_POST['nombre1'])) ? $_POST['nombre1'] : $valores_por_defecto[0];
-                    $apellidos = isset($_POST['apellidos']) && !empty(trim($_POST['apellidos'])) ? $_POST['apellidos'] : $valores_por_defecto[1];
-                    $coche = isset($_POST['coche']) ? 'Si' : $valores_por_defecto[2];
-                    $moto = isset($_POST['moto']) ? 'Si' : $valores_por_defecto[3];
-                    $barco = isset($_POST['barco']) ? 'Si' : $valores_por_defecto[4];
-                    $comida = isset($_POST['comida']) ? $_POST['comida'] : $valores_por_defecto[5];
+                    $nombre1 = isset($_POST['nombre1']) && !empty(trim($_POST['nombre1'])) ? $_POST['nombre1'] : '';
+                    $apellidos = isset($_POST['apellidos']) && !empty(trim($_POST['apellidos'])) ? $_POST['apellidos'] : '';
+                    $coche = isset($_POST['coche']) ? 'Si' : 'No';
+                    $moto = isset($_POST['moto']) ? 'Si' : 'No';
+                    $barco = isset($_POST['barco']) ? 'Si' : 'No';
+                    $comida = isset($_POST['comida']) ? $_POST['comida'] : '';
 
                     //Almacenamiento de ficheros
                     if (isset($_FILES['fichero1']) && $_FILES['fichero1']['error'] == UPLOAD_ERR_OK) {
@@ -202,10 +201,10 @@
                     } elseif(validarComida($persona[5])){
                         echo "ERROR: No aceptamos gente que prefiera el pollo frito a las otras opciones.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    }/* elseif(validarFichero($_FILES['fichero1'][PATHINFO_EXTENSION]) || validarFichero($_FILES['fichero2'][PATHINFO_EXTENSION])){
+                    } /*elseif(validarFichero($_FILES['fichero1'][PATHINFO_EXTENSION]) || validarFichero($_FILES['fichero2'][PATHINFO_EXTENSION])){
                         echo "ERROR: Los archivos no pueden ser tipo png.<br>";
                         echo "<a href='index.html'>Volver al formulario</a>";
-                    } */else {
+                    }*/ else {
                         // Impresion de datos correctos
                         echo "DATOS CORRECTOS:<br>";
                         echo "Nombre: " . $nombre1 . "<br>";
