@@ -27,20 +27,8 @@
                     $inmunodeficiente = isset($_POST['inmunodeficiente']) ? "Sí" : "No";
                     $castrado = isset($_POST['castrado']) ? "Sí" : "No";
 
-                    // Abrir el fichero
-                    $gatoFile = fopen("aileen_fichero.txt", "r") or die("No se pudo abrir el fichero");
-
                     // Array indexado para los datos
                     $gato = [$nombre, $color, $inmunodeficiente, $castrado];
-
-                    $line = 0;
-                    while(!feof($gatoFile)) {
-                        $gato[$line] = fgets($gatoFile);
-                        $line += 1;
-                    }
-
-                    // Cerrar el fichero
-                    fclose($gatoFile);
 
                     // Guardar los ficheros de datos
                     if (isset($_FILES['primer_fichero']) && $_FILES['primer_fichero']['error'] == UPLOAD_ERR_OK) {
