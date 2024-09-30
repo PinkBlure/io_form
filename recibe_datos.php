@@ -119,12 +119,7 @@
                 // Se rellenó el formulario de index
                 // Comprueba que sea el formulario especifico
                 } elseif ($formulario == 'index'){
-                    // Toma de valores por defecto y almacena en un array.
-                    if(file_exists("./moises_valores.txt")){
-                        $fichero = file_get_contents("./moises_valores.txt");
-                        $valores_por_defecto = explode("-", $fichero);
-                    }
-
+                    
                     // Comprueba la existencia y, en su defecto crea la carpeta ficheros
                     if(!file_exists("./ficheros")){
                         mkdir("ficheros", 0755);
